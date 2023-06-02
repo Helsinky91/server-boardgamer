@@ -25,5 +25,11 @@ public class UserService implements IUserService {
         userRepository.save(updatedUser);
     }
 
+    @Override
+    public void deleteUser(Integer id) {
+        Optional<User> accHolderOptional = userRepository.findById(id);
+        if(accHolderOptional.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account Holder doesn't exists");
+        userRepository.deleteById(id);
+    }
 
 }

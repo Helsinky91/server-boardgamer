@@ -28,10 +28,25 @@ public class UserController implements IUserController {
         return userRepository.findById(id);
     }
 
-    @PutMapping("/{id}")
+
+    // *** POST ***
+    // CREATE ONLY IF USER.TYPE === "ADMIN"
+    // CREATE WHEN LOGGIN IN??
+
+    // *********************** PUT *************************
+
+    @PutMapping("/{id}/edit")
     @ResponseStatus(HttpStatus.OK)
     public void updateUser(@RequestBody @Valid User updatedUser, @PathVariable Integer id){
         userService.updateUser(updatedUser, id);
+    }
+
+    // *********************** DELETE *************************
+
+    @DeleteMapping("/{id}/delete")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable Integer id){
+        userService.deleteUser(id);
     }
 
 

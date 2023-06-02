@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface IUserService {
 
     void updateUser(User updatedUser, Integer id);
+    void deleteUser(Integer id);
 }
