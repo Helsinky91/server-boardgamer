@@ -1,8 +1,10 @@
 package boardgames.server.controller.impl.games;
 
 import boardgames.server.controller.interfaces.games.IGameController;
+import boardgames.server.controller.service.impl.games.GameService;
 import boardgames.server.model.games.Game;
 import boardgames.server.repository.games.GameRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,8 @@ public class GameController implements IGameController {
 
     @Autowired
     private GameRepository gameRepository;
+    @Autowired
+    private GameService gameService;
 
     // *********************** GET *************************
 
@@ -24,19 +28,14 @@ public class GameController implements IGameController {
     }
 
     @GetMapping("/{id}")
-    public Game getGameById(@PathVariable Integer id) throws Exception {
-        Optional<Game> game = gameRepository.findById(id);
-        if (game.isPresent()) {
-            return game.get();
-        } else {
-            throw new Exception("Game not found");
-        }
+    public Game getGameById(@PathVariable Integer id) {
+        return gameService.getGameById(id);
     }
 
     // *********************** POST *************************
-    @PostMapping("")
-    public Game createGame(@RequestBody Game game) {
-        return gameRepository.save(game);
+    @PostMapping("/add-game")
+    public void createGame(@RequestBody @Valid Game newGame) {
+        gameService.createGame(newGame);
     }
 
     // *********************** PUT *************************

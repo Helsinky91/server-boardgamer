@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -29,9 +28,12 @@ public class UserController implements IUserController {
     }
 
 
-    // *** POST ***
-    // CREATE ONLY IF USER.TYPE === "ADMIN"
+    // *********************** POST *************************
+
     //! CREATE WHEN LOGGIN IN??
+
+
+    // CREATE ONLY IF USER.TYPE === "ADMIN"
     @PostMapping("/add-admin")
     @ResponseStatus(HttpStatus.CREATED)
     public void createUser(@RequestBody @Valid User newUser) {

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.nio.file.AccessDeniedException;
 import java.util.Optional;
+
 @Service
 public class UserService implements IUserService {
 
@@ -40,7 +40,6 @@ public class UserService implements IUserService {
         Optional<User> userOptional = userRepository.findById(newUser.getId());
         if(userOptional.isPresent()) throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "this User already exists.");
         if(newUser.getRole() == Role.ADMIN) {
-//            userService.createUser(newUser);
             userRepository.save(newUser);
         }
     }
