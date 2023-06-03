@@ -1,7 +1,6 @@
 package boardgames.server.model.users;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -19,7 +18,7 @@ public class User {
 
     //admin or user
     @Enumerated(EnumType.STRING)
-    private Type type;
+    private Role role;
 
     //@Min
     //@MAX

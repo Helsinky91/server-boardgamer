@@ -1,6 +1,6 @@
 package boardgames.server.model.users;
 
-public enum Type {
+public enum Role {
     ADMIN,
     USER
 }

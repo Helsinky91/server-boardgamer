@@ -31,7 +31,12 @@ public class UserController implements IUserController {
 
     // *** POST ***
     // CREATE ONLY IF USER.TYPE === "ADMIN"
-    // CREATE WHEN LOGGIN IN??
+    //! CREATE WHEN LOGGIN IN??
+    @PostMapping("/add-admin")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createUser(@RequestBody @Valid User newUser) {
+        userService.createUser(newUser);
+    }
 
     // *********************** PUT *************************
 
