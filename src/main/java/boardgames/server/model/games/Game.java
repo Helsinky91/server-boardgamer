@@ -10,19 +10,28 @@ import lombok.*;
 @AllArgsConstructor
 public class Game {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-//    @ManyToOne //! OR ONE TO MANY?
-//    private User owner;
+    //!how to
+    private String picture;
 
     private String name;
+    private String brand;
+    private Integer minAge;
+    private Integer minPlayers;
+    private Integer maxPlayers;
 
     private String description;
 
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    
+    //    @ManyToOne //! OR ONE TO MANY?
+    //    private User owner;
+
+    //private Boolean favourites;
+
+
 }

@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface GameRepository extends JpaRepository<Game, Integer> {
     List<Game> findAll();
     Optional<Game> findById(Integer integer);
+    Game getGameById(Integer randomId);
 }

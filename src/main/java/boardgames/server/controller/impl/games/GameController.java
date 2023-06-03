@@ -6,10 +6,10 @@ import boardgames.server.model.games.Game;
 import boardgames.server.repository.games.GameRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/games")
@@ -22,38 +22,42 @@ public class GameController implements IGameController {
 
     // *********************** GET *************************
 
-    @GetMapping("")
+    @GetMapping("/")
+    @ResponseStatus(HttpStatus.OK)
     public List<Game> getAllGames() {
         return gameRepository.findAll();
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Game getGameById(@PathVariable Integer id) {
         return gameService.getGameById(id);
     }
 
+    @GetMapping("/random-game")
+    @ResponseStatus(HttpStatus.OK)
+    public Game getRandomGame(){
+        return gameService.getRandomGame();
+    }
+
     // *********************** POST *************************
     @PostMapping("/add-game")
+    @ResponseStatus(HttpStatus.CREATED)
     public void createGame(@RequestBody @Valid Game newGame) {
         gameService.createGame(newGame);
     }
 
     // *********************** PUT *************************
-    @PutMapping("/{id}")
-    public Game updateGame(@PathVariable Integer id, @RequestBody Game game) throws Exception {
-        Optional<Game> existingGame = gameRepository.findById(id);
-        if (existingGame.isPresent()) {
-            Game updatedGame = existingGame.get();
-            updatedGame.setName(game.getName());
-            updatedGame.setDescription(game.getDescription());
-            return gameRepository.save(updatedGame);
-        } else {
-            throw new Exception("Game not found");
-        }
+    @PutMapping("/{id}/edit")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateGame(@PathVariable Integer id, @RequestBody Game updatedGame) {
+        gameService.updateGame(id, updatedGame);
     }
+
     // *********************** DELETE *************************
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/delete")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteGame(@PathVariable Integer id) {
-        gameRepository.deleteById(id);
+        gameService.deleteGame(id);
     }
 }
