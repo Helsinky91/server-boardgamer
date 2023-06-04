@@ -1,11 +1,14 @@
 package boardgames.server.model.users;
 
+import boardgames.server.model.games.Game;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -43,6 +46,14 @@ public class User {
     private Address address;
 
     //private String[] favourites;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "user_game",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "game_id") }
+    )
+    private Set<Game> games = new HashSet<>();
 
     public Integer getAge() {
         LocalDate currentDate = LocalDate.now();

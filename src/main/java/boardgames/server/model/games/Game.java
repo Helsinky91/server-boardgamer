@@ -4,6 +4,9 @@ import boardgames.server.model.users.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -14,7 +17,8 @@ public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    //!how to
+
+    //!how to insert pics from DB
     private String picture;
 
     private String name;
@@ -23,13 +27,15 @@ public class Game {
     private Integer minPlayers;
     private Integer maxPlayers;
 
+    @Column(length = 1000)
     private String description;
 
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    //    @ManyToOne //! OR ONE TO MANY?
-    //    private User owner;
+    //!like this?
+    @ManyToMany(mappedBy = "games")
+    private Set<User> user = new HashSet<>();
 
     //private Boolean favourites;
 
