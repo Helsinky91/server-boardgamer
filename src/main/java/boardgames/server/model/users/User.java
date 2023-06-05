@@ -46,7 +46,10 @@ public class User {
     private Address address;
 
     //private String[] favourites;
+    //private String[] wishlist;
 
+        //! es mejor usar String myGames o Set<Game> ??
+    //private String[] myGames;
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "user_game",

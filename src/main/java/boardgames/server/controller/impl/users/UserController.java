@@ -22,7 +22,7 @@ public class UserController implements IUserController {
     // *********************** GET *************************
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
+
     public Optional<User> getUserById(@PathVariable Integer id){
         return userRepository.findById(id);
     }

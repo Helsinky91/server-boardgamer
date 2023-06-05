@@ -1,1 +1,5 @@
 # server-boardgamer
+
+ADD ROUTING AND ENDPOINTS
+
+ALSO TEST IN POSTMAN
