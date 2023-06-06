@@ -7,7 +7,9 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -23,7 +25,7 @@ public class User {
 
     //admin or user
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role role = Role.USER; //default value is Role.USER
 
     @Size(min = 8, max = 12, message = "Username must be between 8 and 12 characters long")
     private String username;
@@ -39,7 +41,8 @@ public class User {
 
     private LocalDate dateOfBirth;
 
-    //!how to
+    //!how to . uso scr en html y le paso {{profile.pic}}
+    @Column(length = 1000)
     private String profilePic;
 
     @Embedded
@@ -50,13 +53,13 @@ public class User {
 
         //! es mejor usar String myGames o Set<Game> ??
     //private String[] myGames;
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_game",
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "game_id") }
     )
-    private Set<Game> games = new HashSet<>();
+    private List<Game> games = new ArrayList<>();
 
     public Integer getAge() {
         LocalDate currentDate = LocalDate.now();

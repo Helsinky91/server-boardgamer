@@ -1,10 +1,13 @@
 package boardgames.server.model.games;
 
 import boardgames.server.model.users.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,7 +21,8 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //!how to insert pics from DB
+    //!how to . uso scr en html y le paso {{picture}}
+    @Column(length = 1000)
     private String picture;
 
     private String name;
@@ -34,8 +38,8 @@ public class Game {
     private Category category;
 
     //!like this?
-    @ManyToMany(mappedBy = "games")
-    private Set<User> user = new HashSet<>();
+    @ManyToMany(mappedBy = "games", fetch = FetchType.EAGER)
+    private List<User> user = new ArrayList<>();
 
     //private Boolean favourites;
 

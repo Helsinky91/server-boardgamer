@@ -22,7 +22,7 @@ public class UserController implements IUserController {
     // *********************** GET *************************
 
     @GetMapping("/{id}")
-
+    @ResponseStatus(HttpStatus.OK)
     public Optional<User> getUserById(@PathVariable Integer id){
         return userRepository.findById(id);
     }
@@ -31,7 +31,10 @@ public class UserController implements IUserController {
     // *********************** POST *************************
 
     //! CREATE WHEN LOGGIN IN??
+    //creo un post con login form para ambos tipos de user
 
+    //en DB cambio manual user role a Admin
+    //! NO CAL EL ADD-ADMIN
 
     // CREATE ONLY IF USER.TYPE === "ADMIN"
     @PostMapping("/add-admin")

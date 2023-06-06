@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/games")
+@RequestMapping("/api/games")
 public class GameController implements IGameController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class GameController implements IGameController {
 
     // *********************** GET *************************
 
-    @GetMapping("/")
+    @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
     public List<Game> getAllGames() {
         return gameRepository.findAll();
