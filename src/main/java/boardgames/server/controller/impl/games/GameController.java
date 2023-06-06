@@ -21,7 +21,6 @@ public class GameController implements IGameController {
     private GameService gameService;
 
     // *********************** GET *************************
-
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
     public List<Game> getAllGames() {

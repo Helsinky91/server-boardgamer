@@ -1,14 +1,12 @@
 package boardgames.server.model.games;
 
 import boardgames.server.model.users.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Data
@@ -21,9 +19,8 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //!how to . uso scr en html y le paso {{picture}}
-    @Column(length = 1000)
-    private String picture;
+        @Column(length = 1000)
+    private String picture = "https://img.freepik.com/vector-premium/esbozo-dos-dados-juego-dados-dibujo-vectorial_231873-30.jpg";
 
     private String name;
     private String brand;

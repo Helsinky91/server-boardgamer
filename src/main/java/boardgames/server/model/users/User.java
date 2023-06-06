@@ -8,10 +8,7 @@ import lombok.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 
 @Entity
 @Data
@@ -27,13 +24,14 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER; //default value is Role.USER
 
-    @Size(min = 8, max = 12, message = "Username must be between 8 and 12 characters long")
+    @Size(min = 5, max = 12, message = "Username must be between 5 and 12 characters long")
     private String username;
 
     @Email(message = "Please provide a valid email")
     private String email;
 
-    @Min(value = 8, message = "Password must be at least 8 characters long")
+    @NotBlank(message = "Password must not be empty")
+    @Size(min = 4, max = 20, message = "Password must be at least 4 characters long")
     @Pattern(regexp = "^(?=.*[A-Z]).+$", message = "Password must contain at least one uppercase letter")
     private String password;
 
@@ -41,9 +39,8 @@ public class User {
 
     private LocalDate dateOfBirth;
 
-    //!how to . uso scr en html y le paso {{profile.pic}}
     @Column(length = 1000)
-    private String profilePicUrl;
+    private String profilePicUrl = "https://cdn2.iconfinder.com/data/icons/essential-web-2/50/user-ciecle-round-account-placeholder-512.png";
 
     @Embedded
     private Address address;
@@ -51,8 +48,6 @@ public class User {
     //private String[] favourites;
     //private String[] wishlist;
 
-        //! es mejor usar String myGames o Set<Game> ??
-    //private String[] myGames;
     @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_game",

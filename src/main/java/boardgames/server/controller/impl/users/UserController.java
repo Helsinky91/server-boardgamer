@@ -7,6 +7,7 @@ import boardgames.server.repository.users.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -27,6 +28,12 @@ public class UserController implements IUserController {
         return userRepository.findById(id);
     }
 
+    //to check if the user already exists:
+    @GetMapping("/api/users/{username}/exists")
+    public ResponseEntity<Boolean> checkIfUserExists(@PathVariable String username) {
+        Optional<User> existingUser = userService.getUserByUsername(username);
+        return ResponseEntity.ok(existingUser.isPresent());
+    }
 
     // *********************** POST *************************
 
@@ -37,7 +44,7 @@ public class UserController implements IUserController {
     //! NO CAL EL ADD-ADMIN
 
     // CREATE ONLY IF USER.TYPE === "ADMIN"
-    @PostMapping("/add-admin")
+    @PostMapping("/add-user")
     @ResponseStatus(HttpStatus.CREATED)
     public void createUser(@RequestBody @Valid User newUser) {
         userService.createUser(newUser);

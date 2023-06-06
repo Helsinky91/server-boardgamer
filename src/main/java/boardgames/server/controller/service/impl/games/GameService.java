@@ -28,8 +28,13 @@ public class GameService implements IGameService {
     @Override
     public Game getRandomGame() {
         List<Game> allGames = gameRepository.findAll();
-        Integer randomId = allGames.get(new Random().nextInt(allGames.size())).getId();
-        return gameRepository.getGameById(randomId);
+        Integer randomId = null;
+
+        do {
+            randomId = allGames.get(new Random().nextInt(allGames.size())).getId();
+        } while (gameRepository.findById(randomId).isEmpty());
+
+        return gameRepository.getById(randomId);
     }
 
     @Override
