@@ -31,13 +31,15 @@ public class Game {
     private Integer minPlayers;
     private Integer maxPlayers;
 
+    //! COLLECTIONS????
+    //private String[] collection;
+
     @Column(length = 1000)
     private String description;
 
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    //!like this?
     @ManyToMany(mappedBy = "games", fetch = FetchType.EAGER)
     private List<User> user = new ArrayList<>();
 

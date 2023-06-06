@@ -43,7 +43,7 @@ public class User {
 
     //!how to . uso scr en html y le paso {{profile.pic}}
     @Column(length = 1000)
-    private String profilePic;
+    private String profilePicUrl;
 
     @Embedded
     private Address address;

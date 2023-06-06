@@ -51,6 +51,8 @@ public class UserController implements IUserController {
         userService.updateUser(updatedUser, id);
     }
 
+    // *********************** PATCH *************************
+
     //! CREATE PACH TO EDIT ONLY ROLE OF USER IF ADMIN?
     //i.e. an admin wants to make another user admin
 

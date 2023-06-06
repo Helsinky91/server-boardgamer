@@ -36,7 +36,7 @@ class GameRepositoryTest {
         //                Category.FAMILY );
         game1 = new Game();
         game1.setId(1);
-        game1.setPicture("pic of Catan");
+        game1.setPicture("https://upload.wikimedia.org/wikipedia/en/a/a3/Catan-2015-boxart.jpg");
         game1.setName("Catan");
         game1.setCategory(Category.FAMILY);
         game1.setBrand("Devir");
@@ -54,7 +54,7 @@ class GameRepositoryTest {
         //                Category.FAMILY );
         game2 = new Game();
         //game2.setId(2);
-        game2.setPicture("pic of Sushi Party Go");
+        game2.setPicture("https://cf.geekdo-images.com/2f9uTicUSXkdPp2Yks6zFw__itemrep/img/Y_jPOWbp6_2qOzymSNIC6SZo4TE=/fit-in/246x300/filters:strip_icc()/pic5885689.jpg");
         game2.setName("Sushi Party Go");
         game2.setCategory(Category.FAMILY);
         game2.setBrand("Devir");
