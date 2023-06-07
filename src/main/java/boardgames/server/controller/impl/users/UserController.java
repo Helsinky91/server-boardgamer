@@ -37,7 +37,7 @@ public class UserController implements IUserController {
     //en DB cambio manual user role a Admin
     //! PUEDO HACER UN PATCH PARA CAMBIAR EL ROLE DEL USER SI ERES ADMIN, NECESITARÉ LISTA DE USERS....
 
-       @PostMapping("/add-user")
+    @PostMapping("/add-user")
     @ResponseStatus(HttpStatus.CREATED)
     public void createUser(@RequestBody @Valid User newUser) {
         userService.createUser(newUser);
