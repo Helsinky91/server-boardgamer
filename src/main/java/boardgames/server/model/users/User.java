@@ -45,8 +45,6 @@ public class User {
     @Embedded
     private Address address;
 
-    //private String[] favourites;
-    //private String[] wishlist;
 
     @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @JoinTable(
@@ -56,11 +54,38 @@ public class User {
     )
     private List<Game> games = new ArrayList<>();
 
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_favorites",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "game_id") }
+    )
+    private List<Game> favorites = new ArrayList<>();
+
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_wishlist",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "game_id") }
+    )
+    private List<Game> wishlist = new ArrayList<>();
+
     public Integer getAge() {
         LocalDate currentDate = LocalDate.now();
         return Period.between(this.dateOfBirth, currentDate).getYears();
     }
 
+    public void addToGamesList(Game game){
+        games.add(game);
+    }
+
+    public void addToFavoritesList(Game game) {
+        favorites.add(game);
+    }
+
+    public void addToWishlistList(Game game) {
+        wishlist.add(game);
+    }
 
 
 }

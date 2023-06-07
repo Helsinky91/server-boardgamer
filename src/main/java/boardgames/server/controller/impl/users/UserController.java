@@ -4,11 +4,11 @@ import boardgames.server.controller.DTO.LoginDTO;
 import boardgames.server.controller.interfaces.users.IUserController;
 import boardgames.server.controller.service.interfaces.users.IUserService;
 import boardgames.server.model.users.User;
+import boardgames.server.repository.games.GameRepository;
 import boardgames.server.repository.users.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -20,6 +20,8 @@ public class UserController implements IUserController {
     UserRepository userRepository;
     @Autowired
     IUserService userService;
+    @Autowired
+    GameRepository gameRepository;
 
     // *********************** GET *************************
 
@@ -30,20 +32,29 @@ public class UserController implements IUserController {
     }
 
 
-
     // *********************** POST *************************
 
-    //! CREATE WHEN LOGGIN IN??
-    //creo un post con login form para ambos tipos de user
-
     //en DB cambio manual user role a Admin
-    //! NO CAL EL ADD-ADMIN
+    //! PUEDO HACER UN PATCH PARA CAMBIAR EL ROLE DEL USER SI ERES ADMIN, NECESITARÉ LISTA DE USERS....
 
-    // CREATE ONLY IF USER.TYPE === "ADMIN"
-    @PostMapping("/add-user")
+       @PostMapping("/add-user")
     @ResponseStatus(HttpStatus.CREATED)
     public void createUser(@RequestBody @Valid User newUser) {
         userService.createUser(newUser);
+    }
+
+
+    @PostMapping("/add-game/{userId}/{gameId}")
+    public void addGameToUser(@PathVariable Integer userId, @PathVariable Integer gameId){
+        userService.addGameToUser(userId, gameId);
+    }
+    @PostMapping("/add-wishlist/{userId}/{gameId}")
+    public void addWishlistToUser(@PathVariable Integer userId, @PathVariable Integer gameId){
+        userService.addWishlistToUser(userId, gameId);
+    }
+    @PostMapping("/add-favourite/{userId}/{gameId}")
+    public void addFavouriteToUser(@PathVariable Integer userId, @PathVariable Integer gameId){
+        userService.addFavouriteToUser(userId, gameId);
     }
 
     // *********************** PUT *************************
