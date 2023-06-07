@@ -34,9 +34,6 @@ public class UserController implements IUserController {
 
     // *********************** POST *************************
 
-    //en DB cambio manual user role a Admin
-    //! PUEDO HACER UN PATCH PARA CAMBIAR EL ROLE DEL USER SI ERES ADMIN, NECESITARÉ LISTA DE USERS....
-
     @PostMapping("/add-user")
     @ResponseStatus(HttpStatus.CREATED)
     public void createUser(@RequestBody @Valid User newUser) {
@@ -66,9 +63,6 @@ public class UserController implements IUserController {
     }
 
     // *********************** PATCH *************************
-
-    //! CREATE PACH TO EDIT ONLY ROLE OF USER IF ADMIN?
-    //i.e. an admin wants to make another user admin
 
     //to check if the user already exists:
     @PatchMapping("/login")
