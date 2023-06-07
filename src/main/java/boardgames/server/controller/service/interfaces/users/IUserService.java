@@ -11,5 +11,5 @@ public interface IUserService {
 
     void createUser(User newUser);
 
-    Optional<User> getUserByUsername(String username);
+    User loginUser(String username, String password);
 }

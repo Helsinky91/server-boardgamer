@@ -30,23 +30,26 @@ public class UserService implements IUserService {
 
     @Override
     public void deleteUser(Integer id) {
-        Optional<User> accHolderOptional = userRepository.findById(id);
-        if(accHolderOptional.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This User doesn't exists");
+        Optional<User> userOptional = userRepository.findById(id);
+        if(userOptional.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This User doesn't exists");
         userRepository.deleteById(id);
     }
 
     @Override
     public void createUser(User newUser) {
-        Optional<User> userOptional = userRepository.findById(newUser.getId());
+        Optional<User> userOptional = userRepository.findByUsernameAndPassword(newUser.getUsername(), newUser.getPassword());
         if(userOptional.isPresent()) throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "this User already exists.");
-//        if(newUser.getRole() == Role.ADMIN) {
-            userRepository.save(newUser);
 
+        userRepository.save(newUser);
     }
 
     @Override
-    public Optional<User> getUserByUsername(String username) {
-        return Optional.empty();
+    public User loginUser(String username, String password) {
+        Optional<User> userOptional = userRepository.findByUsernameAndPassword(username, password);
+        if(userOptional.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This User doesn't exists");
+
+        return userOptional.get();
+
     }
 
 

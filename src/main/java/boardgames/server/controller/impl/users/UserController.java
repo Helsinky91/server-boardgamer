@@ -1,5 +1,6 @@
 package boardgames.server.controller.impl.users;
 
+import boardgames.server.controller.DTO.LoginDTO;
 import boardgames.server.controller.interfaces.users.IUserController;
 import boardgames.server.controller.service.interfaces.users.IUserService;
 import boardgames.server.model.users.User;
@@ -28,12 +29,7 @@ public class UserController implements IUserController {
         return userRepository.findById(id);
     }
 
-    //to check if the user already exists:
-    @GetMapping("/api/users/{username}/exists")
-    public ResponseEntity<Boolean> checkIfUserExists(@PathVariable String username) {
-        Optional<User> existingUser = userService.getUserByUsername(username);
-        return ResponseEntity.ok(existingUser.isPresent());
-    }
+
 
     // *********************** POST *************************
 
@@ -63,6 +59,11 @@ public class UserController implements IUserController {
     //! CREATE PACH TO EDIT ONLY ROLE OF USER IF ADMIN?
     //i.e. an admin wants to make another user admin
 
+    //to check if the user already exists:
+    @PatchMapping("/login")
+    public User loginUser(@RequestBody LoginDTO loginDTO) {
+        return userService.loginUser(loginDTO.getUsername(), loginDTO.getPassword());
+    }
 
 
     // *********************** DELETE *************************
