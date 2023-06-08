@@ -42,6 +42,7 @@ public class UserController implements IUserController {
 
 
     @PostMapping("/add-game/{userId}/{gameId}")
+    @ResponseStatus(HttpStatus.OK)
     public void addGameToUser(@PathVariable Integer userId, @PathVariable Integer gameId){
         userService.addGameToUser(userId, gameId);
     }

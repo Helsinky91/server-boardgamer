@@ -62,6 +62,7 @@ public class UserService implements IUserService {
         if(gameOptional.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This Game doesn't exists");
 
         userOptional.get().addToGamesList(gameOptional.get());
+        userRepository.save(userOptional.get());
     }
 
     @Override
@@ -73,6 +74,7 @@ public class UserService implements IUserService {
             if(gameOptional.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This Game doesn't exists");
 
         userOptional.get().addToWishlistList(gameOptional.get());
+        userRepository.save(userOptional.get());
     }
 
     @Override
@@ -84,6 +86,7 @@ public class UserService implements IUserService {
         if(gameOptional.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This Game doesn't exists");
 
         userOptional.get().addToFavoritesList(gameOptional.get());
+        userRepository.save(userOptional.get());
     }
 
 

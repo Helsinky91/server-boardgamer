@@ -1,6 +1,8 @@
 package boardgames.server.model.users;
 
 import boardgames.server.model.games.Game;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -52,22 +54,25 @@ public class User {
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "game_id") }
     )
+    @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
     private List<Game> games = new ArrayList<>();
 
     @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_favorites",
             joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "game_id") }
+            inverseJoinColumns = { @JoinColumn(name = "favorites_id") }
     )
+    @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
     private List<Game> favorites = new ArrayList<>();
 
     @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_wishlist",
             joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "game_id") }
+            inverseJoinColumns = { @JoinColumn(name = "wishlist_id") }
     )
+    @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
     private List<Game> wishlist = new ArrayList<>();
 
     public Integer getAge() {
