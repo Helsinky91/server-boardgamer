@@ -39,7 +39,7 @@ public class User {
 
     private String selfDescription;
 
-    private LocalDate dateOfBirth;
+//    private LocalDate dateOfBirth;
 
     @Column(length = 1000)
     private String profilePicUrl = "https://cdn2.iconfinder.com/data/icons/essential-web-2/50/user-ciecle-round-account-placeholder-512.png";
@@ -75,10 +75,10 @@ public class User {
     @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
     private List<Game> wishlist = new ArrayList<>();
 
-    public Integer getAge() {
-        LocalDate currentDate = LocalDate.now();
-        return Period.between(this.dateOfBirth, currentDate).getYears();
-    }
+//    public Integer getAge() {
+//        LocalDate currentDate = LocalDate.now();
+//        return Period.between(this.dateOfBirth, currentDate).getYears();
+//    }
 
     public void addToGamesList(Game game){
         games.add(game);
