@@ -27,13 +27,6 @@ class GameRepositoryTest {
 
     @BeforeEach
     public void setUp(){
-//        User user1 = new User("John", "Doe", "john.doe@email.com", "password");
-//        User user2 = new User("Jane", "Doe", "jane.doe@email.com", "password");
-// userrepo.save(user1)
-
-        //Game game1 = new Game(1, "pic of Catan", "Catan", "Devir", 10, 3, 4,
-        //                "It is a game that combines strategy, cunning and the ability to negotiate and in which players try to colonize an island, Catan, rich in natural resources. Building towns, establishing trade routes, etc.",
-        //                Category.FAMILY );
         game1 = new Game();
         game1.setId(1);
         game1.setPicture("https://upload.wikimedia.org/wikipedia/en/a/a3/Catan-2015-boxart.jpg");
@@ -44,16 +37,11 @@ class GameRepositoryTest {
         game1.setMinPlayers(3);
         game1.setMaxPlayers(4);
         game1.setDescription("It is a game that combines strategy, cunning and the ability to negotiate and in which players try to colonize an island, Catan, rich in natural resources. Building towns, establishing trade routes, etc.");
-//        game1.setUser((Set<User>) user1);
-//        game1.setUser((Set<User>) user2);
-
         gameRepository.save(game1);
 
-        // Game game2 = new Game( 2, "pic of Sushi Party Go", "Sushy Party Go", "Devir", 8, 2, 8,
-        //                "Sushi Go! It's a fun and fast card game where each player tries to eat the perfect menu of their favorite food. To do this, they have to combine the cards in the best possible way. The problem? That the cards circulate around the table at full speed and in each turn only one card can be played.",
-        //                Category.FAMILY );
+
         game2 = new Game();
-        //game2.setId(2);
+        game2.setId(2);
         game2.setPicture("https://cf.geekdo-images.com/2f9uTicUSXkdPp2Yks6zFw__itemrep/img/Y_jPOWbp6_2qOzymSNIC6SZo4TE=/fit-in/246x300/filters:strip_icc()/pic5885689.jpg");
         game2.setName("Sushi Party Go");
         game2.setCategory(Category.FAMILY);
@@ -62,7 +50,6 @@ class GameRepositoryTest {
         game2.setMinPlayers(2);
         game2.setMaxPlayers(8);
         game2.setDescription("Sushi Go! It's a fun and fast card game where each player tries to eat the perfect menu of their favorite food. To do this, they have to combine the cards in the best possible way. The problem? That the cards circulate around the table at full speed and in each turn only one card can be played.");
-      //  game2.setUser((Set<User>) user1);
         gameRepository.save(game2);
     }
 
